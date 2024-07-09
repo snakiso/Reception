@@ -1,0 +1,39 @@
+@import "../../../styles/breakpoints";
+
+.button {
+  @include desktop {
+    padding: 8px 16px;
+  }
+
+  @include tablet {
+    padding: 6px 12px;
+  }
+
+  @include mobile {
+    padding: 6px 12px;
+  }
+
+  all: unset;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:active {
+    background-color: var(--color_active);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    background-color: var(--color_secondary_2);
+  }
+}
+
+.primary {
+  color: white;
+  background-color: var(--color_action);
+}
+
+.outline {
+  color: var(--color_action);
+  background: none;
+  border: 1px solid var(--color_action);
+}

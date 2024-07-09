@@ -1,0 +1,7 @@
+.link {
+  color: var(--color_secondary);
+
+  &.active {
+    color: var(--color_action);
+  }
+}

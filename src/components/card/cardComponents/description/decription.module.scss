@@ -1,0 +1,14 @@
+.description {
+  display: flex;
+  flex-direction: column;
+  max-width: 420px;
+
+  span {
+    margin-bottom: 8px;
+    color: var(--color_secondary);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}

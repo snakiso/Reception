@@ -1,0 +1,95 @@
+@import "../../../styles/breakpoints";
+
+.personLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1280px;
+  padding: 12px 0;
+
+  background: var(--color_reg_no);
+  border-radius: 4px;
+
+  &.active {
+    background: var(--color_reg_yes);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.text {
+  padding-left: 8px;
+
+  &.active {
+    color: var(--color_secondary);
+  }
+}
+
+.table {
+  &.active {
+    color: var(--color_secondary);
+  }
+}
+
+.icons {
+  @include mobile {
+    flex-direction: column;
+    width: 45px;
+    height: 70px;
+  }
+
+  @include tablet {
+    width: 100px;
+  }
+
+  @include desktop {
+    width: 120px;
+  }
+
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.check {
+  background: none !important;
+}
+
+.darkBg {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  width: 100vw;
+  height: 100vh;
+
+  opacity: 0.7;
+  background-color: black;
+}
+
+.accessButton {
+  display: block;
+
+  width: 32px;
+  height: 32px;
+
+  border: 2px solid var(--color_secondary);
+  border-radius: 3px;
+}
+
+.personLineGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 210px;
+}

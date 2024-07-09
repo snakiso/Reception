@@ -1,0 +1,36 @@
+.closeButtonWrapper {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  all: unset;
+
+  cursor: pointer;
+
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+
+  &::before,
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: var(--color_secondary);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

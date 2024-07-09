@@ -1,0 +1,192 @@
+@import "../../../styles/breakpoints";
+
+@mixin typography($fontSize, $lineHeight, $fontWeight) {
+  margin: 0;
+
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: inherit;
+}
+
+.h1 {
+  @include desktop {
+    @include typography(
+      var(--font-size-xxl),
+      var(--line-height-xxl),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-l),
+      var(--line-height-l),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-l),
+      var(--line-height-l),
+      var(--font-weight-medium)
+    );
+  }
+}
+
+.body0s {
+  @include desktop {
+    @include typography(
+      var(--font-size-xl),
+      var(--line-height-xl),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-l),
+      var(--line-height-m),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-l),
+      var(--line-height-m),
+      var(--font-weight-semibold)
+    );
+  }
+}
+
+.body1s {
+  @include desktop {
+    @include typography(
+      var(--font-size-m),
+      var(--line-height-s),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-semibold)
+    );
+  }
+}
+
+.body1m {
+  @include desktop {
+    @include typography(
+      var(--font-size-m),
+      var(--line-height-s),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-medium)
+    );
+  }
+}
+
+.body2s {
+  @include desktop {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-xs),
+      var(--line-height-xs),
+      var(--font-weight-semibold)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-xs),
+      var(--line-height-xs),
+      var(--font-weight-semibold)
+    );
+  }
+}
+
+.body2m {
+  @include desktop {
+    @include typography(
+      var(--font-size-s),
+      var(--line-height-xs),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-xs),
+      var(--line-height-xs),
+      var(--font-weight-medium)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-xs),
+      var(--line-height-xs),
+      var(--font-weight-medium)
+    );
+  }
+}
+
+.body3r {
+  @include desktop {
+    @include typography(
+      var(--font-size-xs),
+      var(--line-height-xs),
+      var(--font-weight-regular)
+    );
+  }
+
+  @include tablet {
+    @include typography(
+      var(--font-size-xxs),
+      var(--line-height-xxs),
+      var(--font-weight-regular)
+    );
+  }
+
+  @include mobile {
+    @include typography(
+      var(--font-size-xxs),
+      var(--line-height-xxs),
+      var(--font-weight-regular)
+    );
+  }
+}

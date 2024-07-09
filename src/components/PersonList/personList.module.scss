@@ -1,0 +1,24 @@
+@import "../../styles/breakpoints";
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 1310px;
+  margin: 20px auto 40px;
+  padding: 0 15px;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tableHeaderGroup {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 235px;
+}

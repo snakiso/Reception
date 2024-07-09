@@ -1,0 +1,32 @@
+.box {
+  position: relative;
+  max-width: 1310px;
+  margin: 40px auto 20px;
+  padding: 0 15px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    transform: translateY(-50%);
+  }
+}
+
+.textField {
+  all: unset;
+
+  width: calc(100% - 35px);
+  height: 50px;
+  padding-left: 35px;
+
+  font-family: var(--font-family-primary);
+  color: var(--color_primary);
+
+  background: var(--color_secondary_3, #fafafa);
+  border: 1px solid var(--color_secondary_2, #e6e6e6);
+  border-radius: 4px;
+
+  &::placeholder {
+    color: var(--color_primary);
+  }
+}

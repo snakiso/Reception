@@ -1,0 +1,46 @@
+@import "../../../styles/breakpoints";
+
+.key {
+  all: unset;
+
+  cursor: pointer;
+
+  padding: 6px 12px;
+
+  background-color: var(--color_secondary_2);
+  border: 1px solid var(--color_secondary_2);
+  border-radius: 4px;
+
+  &:active {
+    color: var(--color_action);
+    background: none;
+    border: 1px solid var(--color_action);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.active {
+    color: var(--color_action);
+    background: none;
+    border: 1px solid var(--color_action);
+  }
+}
+
+.buttonWrapper {
+  @include desktop {
+    padding: 15px 25px;
+  }
+
+  @include tablet {
+    padding: 10px 15px;
+  }
+
+  @include mobile {
+    padding: 10px 15px;
+  }
+
+  margin: -5px;
+}

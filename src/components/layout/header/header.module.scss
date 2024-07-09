@@ -1,0 +1,31 @@
+@import "../../../styles/breakpoints";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1310px;
+  margin: 40px auto 60px;
+  padding: 0 15px;
+}
+
+.headerImg {
+  width: 100%;
+  max-width: 200px;
+  object-fit: cover;
+}
+
+.headerTitle {
+  @include mobile {
+    max-width: 235px;
+  }
+
+  @include tablet {
+    max-width: 235px;
+  }
+
+  max-width: 430px;
+  margin-left: 20px !important;
+  text-align: end;
+}

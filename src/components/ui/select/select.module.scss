@@ -1,0 +1,44 @@
+.select {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 0;
+
+  color: var(--color_action);
+
+  .arrow {
+    display: flex;
+    margin-left: 15px;
+  }
+}
+
+.item {
+  cursor: pointer;
+  color: var(--color_action);
+
+  &[data-state="checked"] {
+    color: var(--color_secondary);
+  }
+
+  &[data-highlighted] {
+    outline: none;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 12px;
+  }
+}
+
+.portal {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+
+  padding: 8px;
+
+  background: var(--color_secondary_3);
+  border: 1px solid var(--color_secondary_2);
+  border-radius: 4px;
+}

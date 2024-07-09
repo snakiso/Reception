@@ -1,0 +1,21 @@
+.iconButton {
+  all: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  color: var(--color_action);
+
+  background: white;
+  border-radius: 4px;
+
+  &:active {
+    color: var(--color_active);
+  }
+}
