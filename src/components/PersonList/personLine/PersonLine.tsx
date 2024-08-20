@@ -26,10 +26,12 @@ export const RegisteredContext = createContext<(params: { id: number, registered
 
 export const PersonLine = memo(({data}: PersonLineProps) => {
     const settings = useContext(SettingsContext);
+
     const {mutate: update, isPending, isSuccess, response} = UseRegistered()
     const [openInfo, setOpenInfo] = useState(false);
     const [openPopup, setOpenPopup] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false)
+
     const classNames = {
         personLine: clsx(s.personLine, isRegistered && s.active),
         table: clsx(s.table, isRegistered && s.active),
@@ -37,12 +39,12 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
     };
 
     useEffect(() => {
-        if (isSuccess && response) {
-            setIsRegistered(response.IS_ATTENDED)
-        } else {
+        if (data) {
             setIsRegistered(data.registered)
+        } else if (isSuccess && response) {
+            setIsRegistered(response.IS_ATTENDED)
         }
-    }, [isSuccess]);
+    }, [isSuccess, data]);
 
     const confirmRegistration = () => {
         if (settings?.confirm) {

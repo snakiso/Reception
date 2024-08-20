@@ -11,6 +11,7 @@ export const AlphabetList = () => {
     const [currentLetter, setCurrentLetter] = useState<string>("");
     const [keyBoardHeight, setKeyBoardHeight] = useState(0);
     const {data, isSuccess} = UseGetParticipants()
+
     const divRef: Ref<HTMLDivElement> = useRef(null);
     let filteredParticipants: Participant[] = [];
 
