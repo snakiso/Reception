@@ -23,14 +23,13 @@ type PersonLineProps = {
 export const RegisteredContext = createContext<(params: { id: number, registered: boolean }) => void>(() => {
 });
 
-
 export const PersonLine = memo(({data}: PersonLineProps) => {
     const settings = useContext(SettingsContext);
-
-    const {mutate: update, isPending, isSuccess, response} = UseRegistered()
+    const id = data.id;
+    const {mutate: update, isPending} = UseRegistered()
     const [openInfo, setOpenInfo] = useState(false);
     const [openPopup, setOpenPopup] = useState(false);
-    const [isRegistered, setIsRegistered] = useState(false)
+    const [isRegistered, setIsRegistered] = useState(data.registered)
 
     const classNames = {
         personLine: clsx(s.personLine, isRegistered && s.active),
@@ -41,19 +40,49 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
     useEffect(() => {
         if (data) {
             setIsRegistered(data.registered)
-        } else if (isSuccess && response) {
-            setIsRegistered(response.IS_ATTENDED)
         }
-    }, [isSuccess, data]);
+    }, [data]);
+
+    useEffect(() => {
+        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+        if (registeredArr.includes(id)) {
+            setIsRegistered(true)
+        }
+    }, []);
 
     const confirmRegistration = () => {
         if (settings?.confirm) {
             setOpenPopup(true);
         } else {
-            const id = data.id;
-            update({id, registered: true});
+            setIsRegistered(true);
+
+            const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+            let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+
+            if (unregisteredArr.includes(id)) {
+                unregisteredArr = unregisteredArr.filter(item => item !== id);
+                localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
+            } else if (!registeredArr.includes(id)) {
+                registeredArr.push(id);
+                localStorage.setItem('registered', JSON.stringify(registeredArr));
+            }
         }
     };
+
+    // useEffect(() => {
+    //     if (response) {
+    //         setIsRegistered(response.IS_ATTENDED)
+    //     }
+    // }, [response]);
+
+
+    // const confirmRegistration = () => {
+    //     if (settings?.confirm) {
+    //         setOpenPopup(true);
+    //     } else {
+    //         update({id, registered: true})
+    //     }
+    // };
 
     return (
         <RegisteredContext.Provider value={update}>
@@ -65,6 +94,7 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
                         id={data.id}
                         open={openInfo}
                         isRegistered={isRegistered}
+                        setIsRegistered={setIsRegistered}
                     />
                 )}
                 {openPopup && (

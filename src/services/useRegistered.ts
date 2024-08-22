@@ -4,7 +4,7 @@ import {updateResponse} from "../types/participants.type.ts";
 
 export const UseRegistered = () => {
     //  const queryClient = useQueryClient();
-    const {mutate, isPending, isSuccess, data: response} = useMutation<updateResponse, any, {
+    const {mutate, isPending, isSuccess, data: response, reset} = useMutation<updateResponse, any, {
         id: number,
         registered: boolean
     }, unknown>({
@@ -17,7 +17,7 @@ export const UseRegistered = () => {
         }
     })
 
-    return {mutate, isPending, isSuccess, response}
+    return {mutate, isPending, isSuccess, response, reset}
 };
 
 

@@ -3,8 +3,7 @@ import {clsx} from "clsx";
 import s from "./popUp.module.scss";
 import {Typography} from "../ui/typography/Typography.tsx";
 import {Button} from "../ui/button/Button.tsx";
-import {useContext} from "react";
-import {RegisteredContext} from "../PersonList/personLine/PersonLine.tsx";
+import {Dispatch} from "react";
 import {createPortal} from "react-dom";
 
 
@@ -13,16 +12,33 @@ type PopUpProps = {
     id: number;
     isOpen: boolean;
     title: string;
+    setIsRegistered: Dispatch<boolean>
 };
 
-export const PopUp = ({close, id, isOpen, title}: PopUpProps) => {
-    const update = useContext(RegisteredContext)
+export const PopUp = ({close, id, isOpen, title, setIsRegistered}: PopUpProps) => {
+   // const update = useContext(RegisteredContext)
     const classNames = clsx(s.popUp, isOpen && s.active);
 
-    const updateHandler = () => {
-        update({id, registered: true});
+    // const updateHandler = () => {
+    //     update({id, registered: true});
+    //     close();
+    // };
+
+    const confimRegistration = () => {
+        setIsRegistered(true);
+
+        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+
+        if (unregisteredArr.includes(id)) {
+            unregisteredArr = unregisteredArr.filter(item => item !== id);
+            localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
+        } else if (!registeredArr.includes(id)) {
+            registeredArr.push(id);
+            localStorage.setItem('registered', JSON.stringify(registeredArr));
+        }
         close();
-    };
+    }
 
     return (
         createPortal(
@@ -36,7 +52,7 @@ export const PopUp = ({close, id, isOpen, title}: PopUpProps) => {
                 </Button>
                 <Button
                     className={s.popUpButton}
-                    onClick={updateHandler}
+                    onClick={confimRegistration}
                     variant={"primary"}
                 >
                     <Typography variant={"body2m"}>Да</Typography>

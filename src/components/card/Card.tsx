@@ -8,8 +8,7 @@ import {Button} from "../ui/button/Button.tsx";
 import {Description} from "./cardComponents/description/Description.tsx";
 import {CloseButton} from "./cardComponents/closeButton/closeButton.tsx";
 import {OwnInfo} from "./cardComponents/ownInfo/OwnInfo.tsx";
-import {useContext} from "react";
-import {RegisteredContext} from "../PersonList/personLine/PersonLine.tsx";
+import {Dispatch} from "react";
 import {createPortal} from "react-dom";
 
 type CardProps = {
@@ -18,20 +17,53 @@ type CardProps = {
     id: number;
     open: boolean;
     isRegistered: boolean
+    setIsRegistered: Dispatch<boolean>
 };
 
-export const Card = ({close, data, id, open, isRegistered}: CardProps) => {
+
+export const Card = ({close, data, id, open, isRegistered, setIsRegistered}: CardProps) => {
     const classNames = clsx(s.card, open && s.active);
 
-    const update = useContext(RegisteredContext)
+    // const update = useContext(RegisteredContext)
     const closeHandler = () => {
         close(false);
     };
 
-    const updateHandler = (registered: boolean) => {
-        update({id, registered});
-        closeHandler();
-    };
+    // const updateHandler = (registered: boolean) => {
+    //     update({id, registered});
+    //     closeHandler();
+    // };
+
+    const confimRegistration = () => {
+        setIsRegistered(true);
+
+        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+
+        if (unregisteredArr.includes(id)) {
+            unregisteredArr = unregisteredArr.filter(item => item !== id);
+            localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
+        } else if (!registeredArr.includes(id)) {
+            registeredArr.push(id);
+            localStorage.setItem('registered', JSON.stringify(registeredArr));
+        }
+        closeHandler()
+    }
+
+    const cancelRegistration = () => {
+        setIsRegistered(false)
+        let registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+        const unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+        if (registeredArr.includes(id)) {
+            registeredArr = registeredArr.filter(item => item !== id);
+            localStorage.setItem('registered', JSON.stringify(registeredArr));
+        } else if (!unregisteredArr.includes(id)) {
+            unregisteredArr.push(id);
+            localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
+        }
+        closeHandler()
+    }
+
 
     return (
         createPortal(
@@ -58,14 +90,14 @@ export const Card = ({close, data, id, open, isRegistered}: CardProps) => {
                 <div className={s.cardButtons}>
                     <Button
                         disabled={isRegistered}
-                        onClick={() => updateHandler(true)}
+                        onClick={confimRegistration}
                         variant={"primary"}
                     >
                         Зарегистрировать
                     </Button>
                     <Button
                         disabled={!isRegistered}
-                        onClick={() => updateHandler(false)}
+                        onClick={cancelRegistration}
                         variant={"primary"}
                     >
                         Отклонить

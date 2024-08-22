@@ -6,6 +6,7 @@ import {UseSettings} from "../services/useSettings.ts";
 import {UseStyles} from "../services/useStyles.ts";
 import {DynamicStyles} from "../styles/DynamicStyles.tsx";
 import {StylesResponse} from "../types/style.type.ts";
+import {useFetching} from "../hooks/useFetching.ts";
 
 export const SettingsContext = createContext<SettingsData | undefined>(
     undefined,
@@ -17,7 +18,7 @@ export const StylesContext = createContext<StylesResponse | undefined>(
 
 
 export function App() {
-
+    useFetching()
     const {settings} = UseSettings()
     const {styles, isSuccess} = UseStyles()
 

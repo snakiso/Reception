@@ -1,5 +1,5 @@
 {
-  "confirm": false,
+  "confirm": true,
   "table": false,
   "photo": false,
   "baseURL": "https://partners.russia-transport.ru/.endpoint/",

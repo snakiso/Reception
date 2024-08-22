@@ -23,7 +23,6 @@ export const FullList = () => {
         setSelectValue(value);
         if (data) {
             if (value === "check") {
-                console.log('here')
                 resultData = data.participant.filter(
                     (item) => item.registered,
                 );
