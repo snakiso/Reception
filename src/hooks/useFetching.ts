@@ -7,11 +7,9 @@ export const useFetching = () => {
 
     useEffect(() => {
         const processRegisteredIds = () => {
-            if (localStorage.getItem('registered')) {
-
                 const processNextId = () => {
-                    const idsForConfirm = JSON.parse(localStorage.getItem('registered'));
-                    const idsForCancel = JSON.parse(localStorage.getItem('unregistered'));
+                    const idsForConfirm = JSON.parse(localStorage.getItem('registered') || '[]');
+                    const idsForCancel = JSON.parse(localStorage.getItem('unregistered') || '[]');
                     if (idsForCancel.length > 0) {
                         const id = idsForCancel[0]
                         update({id, registered: false});
@@ -30,9 +28,6 @@ export const useFetching = () => {
                 }, 5000);
 
                 return () => clearInterval(interval);
-            } else {
-                console.log('Массив чисел не найден в локальном хранилище браузера.');
-            }
         };
 
         processRegisteredIds();
@@ -40,15 +35,15 @@ export const useFetching = () => {
 
     useEffect(() => {
         if (isSuccess && response?.IS_ATTENDED) {
-            let ids = JSON.parse(localStorage.getItem('registered'));
+            let ids = JSON.parse(localStorage.getItem('registered') || '[]');
             const id = ids[0];
-            ids = ids.filter((item) => item !== id);
+            ids = ids.filter((item: number) => item !== id);
 
             localStorage.setItem('registered', JSON.stringify(ids));
         } else if (isSuccess && !response?.IS_ATTENDED) {
-            let ids = JSON.parse(localStorage.getItem('unregistered'));
+            let ids = JSON.parse(localStorage.getItem('unregistered') || '[]');
             const id = ids[0];
-            ids = ids.filter((item) => item !== id);
+            ids = ids.filter((item: number) => item !== id);
 
             localStorage.setItem('unregistered', JSON.stringify(ids));
         }

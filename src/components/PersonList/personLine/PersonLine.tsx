@@ -44,7 +44,7 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
     }, [data]);
 
     useEffect(() => {
-        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
+        const registeredArr = JSON.parse(localStorage.getItem('registered') || '[]')
         if (registeredArr.includes(id)) {
             setIsRegistered(true)
         }
@@ -56,11 +56,11 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
         } else {
             setIsRegistered(true);
 
-            const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
-            let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+            const registeredArr = JSON.parse(localStorage.getItem('registered') || '[]')
+            let unregisteredArr = JSON.parse(localStorage.getItem('unregistered') || '[]')
 
             if (unregisteredArr.includes(id)) {
-                unregisteredArr = unregisteredArr.filter(item => item !== id);
+                unregisteredArr = unregisteredArr.filter((item: number) => item !== id);
                 localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
             } else if (!registeredArr.includes(id)) {
                 registeredArr.push(id);
@@ -103,6 +103,7 @@ export const PersonLine = memo(({data}: PersonLineProps) => {
                         id={data.id}
                         isOpen={openPopup}
                         title={"Подтвердить регистрацию?"}
+                        setIsRegistered={setIsRegistered}
                     />
                 )}
                 {(openInfo || openPopup) && <div className={s.darkBg}></div>}

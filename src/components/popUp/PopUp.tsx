@@ -27,11 +27,11 @@ export const PopUp = ({close, id, isOpen, title, setIsRegistered}: PopUpProps) =
     const confimRegistration = () => {
         setIsRegistered(true);
 
-        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
-        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+        const registeredArr = JSON.parse(localStorage.getItem('registered') || '[]')
+        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered') || '[]')
 
         if (unregisteredArr.includes(id)) {
-            unregisteredArr = unregisteredArr.filter(item => item !== id);
+            unregisteredArr = unregisteredArr.filter((item: number) => item !== id);
             localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
         } else if (!registeredArr.includes(id)) {
             registeredArr.push(id);

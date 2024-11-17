@@ -37,11 +37,11 @@ export const Card = ({close, data, id, open, isRegistered, setIsRegistered}: Car
     const confimRegistration = () => {
         setIsRegistered(true);
 
-        const registeredArr = JSON.parse(localStorage.getItem('registered')) || []
-        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+        const registeredArr = JSON.parse(localStorage.getItem('registered') || '[]')
+        let unregisteredArr = JSON.parse(localStorage.getItem('unregistered') || '[]')
 
         if (unregisteredArr.includes(id)) {
-            unregisteredArr = unregisteredArr.filter(item => item !== id);
+            unregisteredArr = unregisteredArr.filter((item: number) => item !== id);
             localStorage.setItem('unregistered', JSON.stringify(unregisteredArr));
         } else if (!registeredArr.includes(id)) {
             registeredArr.push(id);
@@ -52,10 +52,10 @@ export const Card = ({close, data, id, open, isRegistered, setIsRegistered}: Car
 
     const cancelRegistration = () => {
         setIsRegistered(false)
-        let registeredArr = JSON.parse(localStorage.getItem('registered')) || []
-        const unregisteredArr = JSON.parse(localStorage.getItem('unregistered')) || []
+        let registeredArr = JSON.parse(localStorage.getItem('registered') || '[]')
+        const unregisteredArr = JSON.parse(localStorage.getItem('unregistered') || '[]')
         if (registeredArr.includes(id)) {
-            registeredArr = registeredArr.filter(item => item !== id);
+            registeredArr = registeredArr.filter((item: number) => item !== id);
             localStorage.setItem('registered', JSON.stringify(registeredArr));
         } else if (!unregisteredArr.includes(id)) {
             unregisteredArr.push(id);
